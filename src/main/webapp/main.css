@@ -1,0 +1,179 @@
+body {
+  background-color:white;
+}
+
+h1 {
+    text-align:center;
+    margin:auto;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+#topbanner{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 150%;
+    color: white;
+    background-color: blue;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+#mainbody {
+    font-size: 100%;
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid blue;
+}
+
+p {
+    margin: auto;
+}
+
+.textleft {
+    text-align: left;
+}
+
+.centerit {
+    text-align: center;
+}
+
+.textright {
+    text-align: right;
+}
+
+.red-text {
+    color: red;
+    background-color: yellow;
+}
+
+#assignment {
+    font-size: 75%;
+}
+
+#student {
+    font-size: 60%
+}
+
+.colorit {
+  color:red;
+  font-weight:bolder;
+}
+
+.blackonwhite {
+  color:black;
+  background-color: white;
+  
+}
+/* size: auto; */
+
+#white {
+    background-color: white;
+}
+
+/* tr:hover + #white {background-color: yellow;} */
+/* #white :hover {background-color: yellow;} */
+
+#greenback {
+    background-color: #4CAF50;
+}
+
+#redback {
+    background-color: #CC0066;
+}
+
+#lightgreen {
+    background-color: lightgreen;
+}
+
+#lightred {
+    background-color: lightcoral;
+}
+
+.id {
+    width: 20px;
+    text-align:right;
+}
+
+.description{
+    width:200px;
+    text-align: left;
+}
+
+.instructor{
+    width:140px;
+}
+/*
+    min-width: 60px; worked, but lets try just width
+    that works,eventually collapsing will cause wrap around
+*/
+.duedate {
+    width:60px;  
+}
+
+.submitted {
+    width: 10px;
+}
+
+.actions {
+    width: 10px;
+}
+
+form {
+    margin:auto;
+    margin-bottom:2px;
+    text-align: center;
+}
+
+/*
+    min-width: affects the amount of label text before input box
+*/
+label {
+    display: inline-block;
+    min-width: 70px;
+}
+
+/*
+    width: 700px is VERY important/impactful
+    min-width: 600px;
+*/
+table {
+    border: 1px solid black;
+    margin:auto;
+    border-collapse: collapse;
+}
+
+th, td, tr {
+    border-bottom: 2px solid blue;
+    border-left: 2px solid blue;
+    border-right: 2px solid blue;
+    padding-right:2px;
+    padding-left:2px;
+    margin: auto;
+    font-size: 90%;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+th {
+    background-color: lightblue;
+    color: white;
+}
+
+/* below is example of descendant of CSS */
+
+tr[id='white']:hover td[class='actions'] {background-color: yellow;}
+tr[id='lightgreen']:hover td[class='actions'] {background-color: yellow;}
+tr[id='green']:hover td[class='actions'] {background-color: yellow;}
+tr[id='redback']:hover td[class='actions'] {background-color: yellow;}
