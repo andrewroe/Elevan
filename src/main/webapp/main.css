@@ -120,7 +120,7 @@ p {
     that works,eventually collapsing will cause wrap around
 */
 .duedate {
-    width:60px;  
+    width:64px;  
 }
 
 .submitted {
@@ -128,7 +128,7 @@ p {
 }
 
 .actions {
-    width: 10px;
+    width: 12px;
 }
 
 form {
