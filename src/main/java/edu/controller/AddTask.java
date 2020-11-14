@@ -5,7 +5,7 @@
  */
 package edu.controller;
 
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import edu.model.User;
 import edu.data.DBuser;
 import edu.data.DBtask;
@@ -100,7 +100,7 @@ public class AddTask extends HttpServlet {
                 dbtask.add(description, instructor, duedate, false, id);
             }
 
-            ArrayList<TaskHandlerBean> tasks = null;
+            ArrayList<Task> tasks = null;
                 
                 try {
                     //tasks = todoAppService.instance().getTasks(id);

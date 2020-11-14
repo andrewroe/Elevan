@@ -9,7 +9,7 @@ import edu.data.DBinstructor;
 import edu.data.DBtask;
 import edu.data.DBuser;
 import edu.model.Instructor;
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import edu.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,7 +57,7 @@ public class RemoveTask extends HttpServlet {
         }
 
         //ArrayList<TaskHandlerBean> tasks = todoAppService.instance().getTasks(user.getId());
-        ArrayList<TaskHandlerBean> tasks = dbtask.getTasks(user.getId());
+        ArrayList<Task> tasks = dbtask.getTasks(user.getId());
         request.setAttribute("tasks", tasks);
         //request.setAttribute("instructors", InstructorService.instance().getList());
         request.setAttribute("instructors", dbinstructor.getList());

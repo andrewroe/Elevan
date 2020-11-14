@@ -6,7 +6,7 @@
 package edu.controller;
 
 
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import edu.model.User;
 import edu.model.UserSingleton;
 import edu.data.DBuser;
@@ -140,7 +140,7 @@ public class LoginServlet extends AbstractServlet {
                 }
                 
                 url = "/AssignmentManager.jsp";
-                ArrayList<TaskHandlerBean> tasks = null;
+                ArrayList<Task> tasks = null;
                 
                 try {
                     //tasks = todoAppService.instance().getTasks(user.getId());

@@ -9,7 +9,7 @@ import edu.data.DBinstructor;
 import edu.data.DBtask;
 import edu.data.DBuser;
 import edu.model.Instructor;
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import edu.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,7 +64,7 @@ public class EditTask extends HttpServlet {
         String msgDuedate = "";
         String msgSubmitted = "";
 
-        TaskHandlerBean task = null;
+        Task task = null;
 
         String action = request.getParameter("action");
 
@@ -159,7 +159,7 @@ public class EditTask extends HttpServlet {
         System.out.println("wrap up, userid = " + userid + " taskid = " + taskid);
         log("wrap up, userid = " + userid + " taskid = " + taskid);
                 
-        ArrayList<TaskHandlerBean> tasks = null;
+        ArrayList<Task> tasks = null;
 
         try {
             tasks = dbtask.getTasks(userid);

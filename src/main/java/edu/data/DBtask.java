@@ -5,7 +5,7 @@
  */
 package edu.data;
 
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import static java.rmi.server.LogStream.log;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,10 +24,10 @@ public class DBtask {
         // nothing to do
     }
 
-    public ArrayList<TaskHandlerBean> getTasks(int user) throws ClassNotFoundException, SQLException {
+    public ArrayList<Task> getTasks(int user) throws ClassNotFoundException, SQLException {
 
         log("entry = ");
-        ArrayList<TaskHandlerBean> tasks = new ArrayList<TaskHandlerBean>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         String dbURL = "jdbc:mysql://localhost:3306/MyTasks";
 
@@ -56,7 +56,7 @@ public class DBtask {
                 submitted = results.getBoolean("submitted");
                 userID = results.getInt("userID");
 
-                tasks.add(new TaskHandlerBean(id, description, instructor, duedate, submitted, userID));
+                tasks.add(new Task(id, description, instructor, duedate, submitted, userID));
             }
 
             results.close();
@@ -73,11 +73,11 @@ public class DBtask {
         return tasks;
     }
 
-    public TaskHandlerBean getATask(int taskId) throws ClassNotFoundException, SQLException {
+    public Task getATask(int taskId) throws ClassNotFoundException, SQLException {
 
         log("entry = ");
 
-        TaskHandlerBean task = null;
+        Task task = null;
         String dbURL = "jdbc:mysql://localhost:3306/MyTasks";
         String username = "andrewroe";
         String password = "andysql";
@@ -87,7 +87,7 @@ public class DBtask {
         String duedate;
         boolean submitted;
         int userID = 0;
-        TaskHandlerBean theTask = null;
+        Task theTask = null;
 
         try {
 
@@ -107,7 +107,7 @@ public class DBtask {
                 submitted = results.getBoolean("submitted");
                 userID = results.getInt("userID");
 
-                theTask = new TaskHandlerBean(id, description, instructor, duedate, submitted, userID);
+                theTask = new Task(id, description, instructor, duedate, submitted, userID);
             }
 
             results.close();

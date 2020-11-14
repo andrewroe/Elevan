@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author andrewroe
  */
-public class TaskHandlerBean implements Serializable {
+public class Task implements Serializable {
 
     private int id;
     private String description;
@@ -20,7 +20,7 @@ public class TaskHandlerBean implements Serializable {
     private boolean submitted; 
     private int userID;
 
-    public TaskHandlerBean() {
+    public Task() {
         id = 0;
         description = "";
         instructor = "";
@@ -29,7 +29,7 @@ public class TaskHandlerBean implements Serializable {
         userID = 0;
     }
 
-    public TaskHandlerBean(int id, String description,
+    public Task(int id, String description,
             String instructor, String duedate, boolean submitted, int userID) {
         this.id = id;
         this.description = description;

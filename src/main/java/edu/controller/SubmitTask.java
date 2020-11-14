@@ -10,7 +10,7 @@ import edu.data.DBtask;
 import edu.data.DBuser;
 import edu.model.User;
 import edu.model.Instructor;
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -58,7 +58,7 @@ public class SubmitTask extends HttpServlet {
             request.setAttribute("id", taskid);
         }
 
-        ArrayList<TaskHandlerBean> tasks = null;
+        ArrayList<Task> tasks = null;
         //tasks = todoAppService.instance().getTasks(userid);
         tasks = dbtask.getTasks(userid);
         request.setAttribute("tasks", tasks);

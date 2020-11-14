@@ -5,7 +5,7 @@
  */
 package edu.data;
 
-import edu.model.TaskHandlerBean;
+import edu.model.Task;
 import edu.model.User;
 import static java.rmi.server.LogStream.log;
 import java.sql.Connection;
