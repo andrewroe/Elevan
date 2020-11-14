@@ -7,7 +7,6 @@ package edu.controller;
 
 import edu.model.Task;
 import edu.model.User;
-import edu.model.UserSingleton;
 import edu.data.DBuser;
 import edu.data.DBtask;
 import edu.data.DBinstructor;
@@ -98,9 +97,7 @@ public class RegisterServlet extends AbstractServlet {
             request.setAttribute("user", user);
             request.setAttribute("messages", messages);
             forward(request, response, url);
-        } else {
-            // Potential new registrant, but check for existing user
-            //user = UserSingleton.instance().getUserByEmail(email);
+        } else {            
             user = dbuser.getUserByEmail(email);
             if (user != null) {
                 messages[1] = "This user is already a registered user!";
@@ -113,11 +110,9 @@ public class RegisterServlet extends AbstractServlet {
                 // We can add this new user
                 boolean adminrole = false;
                 if (admin != null) {
-
                     adminrole = true;
                 }
-                //UserSingleton.instance().addUser(username, email, password);
-                //user = UserSingleton.instance().getUserByEmail(email);
+               
                 dbuser.addUser(username, email, password);
                 user = dbuser.getUserByEmail(email);
                 HttpSession session = request.getSession();

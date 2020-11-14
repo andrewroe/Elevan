@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="edu.model.User"%>
-<%@page import="edu.model.UserSingleton"%>
+<%@page import="edu.data.DBuser"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,7 +43,8 @@
             User theuser = (User) request.getAttribute("user");
             log("login.jsp: initial user = " + theuser);
             if (theuser == null) {
-                theuser = UserSingleton.instance().fetchKnownUser(request);
+                User userobj = new User();
+                theuser = userobj.fetchKnownUser(request);
             }
             log("login.jsp: rememberme check, user = " + theuser);
             if (theuser == null) {

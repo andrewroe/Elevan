@@ -8,7 +8,6 @@ package edu.controller;
 
 import edu.model.Task;
 import edu.model.User;
-import edu.model.UserSingleton;
 import edu.data.DBuser;
 import edu.data.DBtask;
 import edu.data.DBinstructor;
@@ -61,11 +60,7 @@ public class LoginServlet extends AbstractServlet {
        
         // the action has to be loginUser
         String emailaddr = null;
-        // Cart cart = null;   !!! Address
-
-        // check for known user
-        //user = UserSingleton.instance().fetchKnownUser(request);
-
+       
         log("validate input");
 
         String username = "";
@@ -102,8 +97,7 @@ public class LoginServlet extends AbstractServlet {
         } else {
             // if we get here, all fields have been entered
             // Potential new login, check for existing user
-            // !!! change this user = UserSingleton.instance().getUserByEmail(email);
-           
+            
             user = dbuser.getUserByEmail(email);
 
             if (user == null) {
