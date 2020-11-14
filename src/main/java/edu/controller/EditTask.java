@@ -9,7 +9,6 @@ import edu.data.DBinstructor;
 import edu.data.DBtask;
 import edu.data.DBuser;
 import edu.model.Instructor;
-import edu.model.InstructorService;
 import edu.model.TaskHandlerBean;
 import edu.model.User;
 import java.io.IOException;
@@ -79,7 +78,6 @@ public class EditTask extends HttpServlet {
         if (action.equals("enterinfo")) {
             url = "/EditTask.jsp";
 
-            // message = " "; // make non-empty
         } else if (action.equals("editinfo")) {
             
             boolean ok = true;
@@ -164,16 +162,13 @@ public class EditTask extends HttpServlet {
         ArrayList<TaskHandlerBean> tasks = null;
 
         try {
-            //tasks = todoAppService.instance().getTasks(userid);
             tasks = dbtask.getTasks(userid);
             request.setAttribute("tasks", tasks);
-            
-            //task = todoAppService.instance().getATask(Integer.parseInt(taskid));
             task = dbtask.getATask(Integer.parseInt(taskid));
-            request.setAttribute("task", task);
-            //request.setAttribute("instructors", InstructorService.instance().getList());
+            request.setAttribute("task", task); 
             request.setAttribute("instructors", dbinstructor.getList());
-            request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
+            //request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
+            request.setAttribute("unlist", dbinstructor.getUnSelectList(task.getInstructor()));
         } catch (Exception e) {
             System.out.println("got a catch ");
             e.printStackTrace(System.out);

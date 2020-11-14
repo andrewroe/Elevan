@@ -6,8 +6,6 @@
 
 
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
-<%@page import="edu.model.InstructorService"%>
 <%@page import="edu.model.TaskHandlerBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

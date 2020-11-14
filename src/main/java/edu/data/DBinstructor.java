@@ -25,7 +25,7 @@ public class DBinstructor {
 
     public ArrayList<Instructor> getList() {
 
-        log("entry = ");
+        log("entry: getList()");
         ArrayList<Instructor> list = new ArrayList<Instructor>();
 
         String dbURL = "jdbc:mysql://localhost:3306/MyTasks";
@@ -63,4 +63,43 @@ public class DBinstructor {
         return list;
     }
 
+    public ArrayList<Instructor> getUnSelectList(String instructor) {
+        
+        ArrayList<Instructor> unlist = new ArrayList<Instructor>();
+       
+        log("entry: getUnSelected()");
+        String dbURL = "jdbc:mysql://localhost:3306/MyTasks";
+
+        int id;
+        String name;
+
+        try {
+
+            ConnectionPool pool = ConnectionPool.getInstance();
+            Connection con = pool.getConnection();
+
+            Statement statement = con.createStatement();
+            String sql = "Select id, name from Instructor where name != '" + instructor + "'";
+            ResultSet results = statement.executeQuery(sql);
+            log("query submitted = " + sql);
+            while (results.next()) {
+
+                id = results.getInt("id");
+                name = results.getString("name");
+
+                unlist.add(new Instructor(id, name));
+            }
+
+            results.close();
+            statement.close();
+            pool.freeConnection(con);
+        } catch (SQLException e) {
+            //Logger.getLogger(todoAppService.class.getName().log(Level.SEVERE, null,e);
+            for (Throwable t : e) {
+                t.printStackTrace();
+            }
+        }
+        return unlist;
+       
+    }
 }
