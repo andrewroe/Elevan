@@ -7,10 +7,12 @@ package edu.controller;
 
 
 import edu.model.InstructorService;
-import edu.model.todoAppService;
 import edu.model.TaskHandlerBean;
 import edu.model.User;
 import edu.model.UserSingleton;
+import edu.data.DBuser;
+import edu.data.DBtask;
+import edu.data.DBinstructor;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,14 +56,16 @@ public class LoginServlet extends AbstractServlet {
         String url = "/whosThere.jsp";  // !!!!   
         User user = null;
         boolean forwarded = false;
-
+        DBuser dbuser = new DBuser();
+        DBtask dbtask = new DBtask();
+        DBinstructor dbinstructor = new DBinstructor();
        
         // the action has to be loginUser
         String emailaddr = null;
         // Cart cart = null;   !!! Address
 
         // check for known user
-        user = UserSingleton.instance().fetchKnownUser(request);
+        //user = UserSingleton.instance().fetchKnownUser(request);
 
         log("validate input");
 
@@ -99,9 +103,9 @@ public class LoginServlet extends AbstractServlet {
         } else {
             // if we get here, all fields have been entered
             // Potential new login, check for existing user
-            user = UserSingleton.instance().getUserByEmail(email);
-
-            // request.setAttribute("products", ProductService.instance().getAllProducts());
+            // !!! change this user = UserSingleton.instance().getUserByEmail(email);
+           
+            user = dbuser.getUserByEmail(email);
 
             if (user == null) {
                 ok = false;
@@ -140,8 +144,11 @@ public class LoginServlet extends AbstractServlet {
                 ArrayList<TaskHandlerBean> tasks = null;
                 
                 try {
-                    tasks = todoAppService.instance().getTasks(user.getId());
-                    request.setAttribute("instructors", InstructorService.instance().getList());
+                    //tasks = todoAppService.instance().getTasks(user.getId());
+                    tasks = dbtask.getTasks(user.getId());
+                    //request.setAttribute("instructors", InstructorService.instance().getList());
+                    request.setAttribute("instructors", dbinstructor.getList());
+                  
                     //request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
                 }
                 catch (Exception e) {

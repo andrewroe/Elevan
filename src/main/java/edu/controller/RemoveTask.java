@@ -5,11 +5,13 @@
  */
 package edu.controller;
 
+import edu.data.DBinstructor;
+import edu.data.DBtask;
+import edu.data.DBuser;
 import edu.model.Instructor;
 import edu.model.InstructorService;
 import edu.model.TaskHandlerBean;
 import edu.model.User;
-import edu.model.todoAppService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,22 +42,27 @@ public class RemoveTask extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
+        DBuser dbuser = new DBuser();
+        DBtask dbtask = new DBtask();
+        DBinstructor dbinstructor = new DBinstructor();
         User user = (User) request.getSession().getAttribute("user");
         int userid = user.getId();
-        //int id = Integer.parseInt(request.getParameter("id"));
-        //String taskid = request.getParameter("taskid");
         int taskid = Integer.parseInt(request.getParameter("taskid"));
         
         System.out.println("userid = " + userid + "taskid = " + taskid);
         log("userid = " + userid + "taskid = " + taskid);
         
         if (request.getParameter("action") != null) {
-            todoAppService.instance().remove(taskid);
+            //todoAppService.instance().remove(taskid);
+            dbtask.remove(taskid);
         }
 
-        ArrayList<TaskHandlerBean> tasks = todoAppService.instance().getTasks(user.getId());
+        //ArrayList<TaskHandlerBean> tasks = todoAppService.instance().getTasks(user.getId());
+        ArrayList<TaskHandlerBean> tasks = dbtask.getTasks(user.getId());
         request.setAttribute("tasks", tasks);
-        request.setAttribute("instructors", InstructorService.instance().getList());
+        //request.setAttribute("instructors", InstructorService.instance().getList());
+        request.setAttribute("instructors", dbinstructor.getList());
+        request.setAttribute("user", user);
             
         getServletContext().getRequestDispatcher("/AssignmentManager.jsp")
                 .forward(request, response);

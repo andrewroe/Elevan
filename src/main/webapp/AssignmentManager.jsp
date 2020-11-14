@@ -4,7 +4,7 @@
     Author     : andrewroe
 --%>
 
-<%@page import="edu.model.todoAppService"%>
+
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <%@page import="edu.model.InstructorService"%>

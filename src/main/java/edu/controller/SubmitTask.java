@@ -5,9 +5,11 @@
  */
 package edu.controller;
 
+import edu.data.DBinstructor;
+import edu.data.DBtask;
+import edu.data.DBuser;
 import edu.model.InstructorService;
 import edu.model.User;
-import edu.model.todoAppService;
 import edu.model.Instructor;
 import edu.model.TaskHandlerBean;
 import java.io.IOException;
@@ -42,21 +44,29 @@ public class SubmitTask extends HttpServlet {
 
         String action = request.getParameter("action");
         log("entry, action = " + action);
+        
+        DBuser dbuser = new DBuser();
+        DBtask dbtask = new DBtask();
+        DBinstructor dbinstructor = new DBinstructor();
 
         User user = (User) request.getSession().getAttribute("user");
         int userid = user.getId();
 
         if (request.getParameter("action") != null) {
             int taskid = Integer.parseInt(request.getParameter("taskid"));
-            todoAppService.instance().markSubmitted(taskid);
+            //todoAppService.instance().markSubmitted(taskid);
+            dbtask.markSubmitted(taskid);
             request.setAttribute("id", taskid);
         }
 
         ArrayList<TaskHandlerBean> tasks = null;
-        tasks = todoAppService.instance().getTasks(userid);
+        //tasks = todoAppService.instance().getTasks(userid);
+        tasks = dbtask.getTasks(userid);
         request.setAttribute("tasks", tasks);
+        request.setAttribute("user", user);
 
-        request.setAttribute("instructors", InstructorService.instance().getList());
+        //request.setAttribute("instructors", InstructorService.instance().getList());
+        request.setAttribute("instructors", dbinstructor.getList());
 
         getServletContext().getRequestDispatcher("/AssignmentManager.jsp")
                 .forward(request, response);

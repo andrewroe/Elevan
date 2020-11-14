@@ -8,7 +8,9 @@ package edu.controller;
 import edu.model.TaskHandlerBean;
 import edu.model.User;
 import edu.model.UserSingleton;
-import edu.model.todoAppService;
+import edu.data.DBuser;
+import edu.data.DBtask;
+import edu.data.DBinstructor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -50,6 +52,9 @@ public class RegisterServlet extends AbstractServlet {
         String password = request.getParameter("password");
         String confirmpwd = request.getParameter("confirmpwd");
         String admin = request.getParameter("role");
+        DBuser dbuser = new DBuser();
+        DBtask dbtask = new DBtask();
+        DBinstructor dbinstructor = new DBinstructor();
 
         User user = new User(0, username, email, password);
 
@@ -95,7 +100,8 @@ public class RegisterServlet extends AbstractServlet {
             forward(request, response, url);
         } else {
             // Potential new registrant, but check for existing user
-            user = UserSingleton.instance().getUserByEmail(email);
+            //user = UserSingleton.instance().getUserByEmail(email);
+            user = dbuser.getUserByEmail(email);
             if (user != null) {
                 messages[1] = "This user is already a registered user!";
                 ok = false;
@@ -110,17 +116,19 @@ public class RegisterServlet extends AbstractServlet {
 
                     adminrole = true;
                 }
-                UserSingleton.instance().addUser(username, email, password);
-                user = UserSingleton.instance().getUserByEmail(email);
+                //UserSingleton.instance().addUser(username, email, password);
+                //user = UserSingleton.instance().getUserByEmail(email);
+                dbuser.addUser(username, email, password);
+                user = dbuser.getUserByEmail(email);
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                //url = "ShopServlet";
-                //redirect(response, url);
-
+                request.setAttribute("instructors", dbinstructor.getList());
+               
                 ArrayList<TaskHandlerBean> tasks = null;
 
                 try {
-                    tasks = todoAppService.instance().getTasks(user.getId());
+                    //tasks = todoAppService.instance().getTasks(user.getId());
+                    tasks = dbtask.getTasks(user.getId());
                 } catch (Exception e) {
 
                 }

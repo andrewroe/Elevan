@@ -6,9 +6,11 @@
 package edu.controller;
 
 import edu.model.InstructorService;
-import edu.model.todoAppService;
 import edu.model.TaskHandlerBean;
 import edu.model.User;
+import edu.data.DBuser;
+import edu.data.DBtask;
+import edu.data.DBinstructor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -45,21 +47,9 @@ public class AddTask extends HttpServlet {
             String instructor = request.getParameter("instructor");
             String duedate = request.getParameter("duedate");
             
-            //TaskHandlerBean user = (TaskHandlerBean) request.getAttribute("user");
-            // NO - Object temp = request.getAttribute("user");
-            //TaskHanderlBean user = request.getParameter("user");
-            
-            // TaskHandlerBean apple = (TaskHandlerBean) temp;
-            
-            //Object user = request.getParameter("user");
-            // Can't be done !!! int userID = ((TaskHandlerBean) user).getId();
-            //TaskHandlerBean user = (TaskHandlerBean) userparm;
-            /*
-            log(" parm = " + parm + ", user = " + user);
-            System.out.println("parm = " + parm + ", user = " + user);
-            */
-            
-            //User user = (User) request.getParameter("user");
+            DBuser dbuser = new DBuser();
+            DBtask dbtask = new DBtask();
+            DBinstructor dbinstructor = new DBinstructor();
             
             User user = (User) request.getSession().getAttribute("user");
             int id = Integer.parseInt(request.getParameter("id"));
@@ -74,7 +64,6 @@ public class AddTask extends HttpServlet {
             int i;
             char ch;
 
-            //request.setAttribute("message", message);
             // validate the parameters
             if (description == null || description.isEmpty()) {
                 msgDescription = "fill in description";
@@ -108,23 +97,26 @@ public class AddTask extends HttpServlet {
             }
 
             if (message.isEmpty()) {
-                todoAppService.instance().add(description, instructor, duedate, false, id);
-                //todoAppService.instance().add(description, instructor, duedate, false, 2);
+                //todoAppService.instance().add(description, instructor, duedate, false, id);
+                dbtask.add(description, instructor, duedate, false, id);
             }
 
             ArrayList<TaskHandlerBean> tasks = null;
                 
                 try {
-                    tasks = todoAppService.instance().getTasks(id);
+                    //tasks = todoAppService.instance().getTasks(id);
+                    tasks = dbtask.getTasks(id);
                 }
                 catch (Exception e) {
                     System.out.println("got a catch ");
                     e.printStackTrace(System.out);
                 }
                 
+            request.setAttribute("user", user);
             request.setAttribute("tasks", tasks);
             request.setAttribute("id", id);
-            request.setAttribute("instructors", InstructorService.instance().getList());
+            //request.setAttribute("instructors", InstructorService.instance().getList());
+            request.setAttribute("instructors", dbinstructor.getList());
                      
             request.setAttribute("message", message);
             request.setAttribute("msgDescription", msgDescription);

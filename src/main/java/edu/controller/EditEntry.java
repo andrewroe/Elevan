@@ -5,10 +5,12 @@
  */
 package edu.controller;
 
+import edu.data.DBinstructor;
+import edu.data.DBtask;
+import edu.data.DBuser;
 import edu.model.Instructor;
 import edu.model.InstructorService;
 import edu.model.TaskHandlerBean;
-import edu.model.todoAppService;
 import edu.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,25 +46,9 @@ public class EditEntry extends HttpServlet {
         HttpSession session = request.getSession();
         String url = "/EditTask.jsp";
         
-        // User user = (User)request.getParameter("user");
-        // Object user = request.getParameter("user");
-        //String userobject = request.getParameter("user");
-        
-        /* The following gives me a class not found error
-        Object userobject = Class.forName(request.getParameter("user"));
-        User user = (User)userobject;
-        */
-        
-        //User user = (User)Object.getObject(request.getParameter("user"));
-        
-        /*
-        String uservalue = request.getParameter("user");
-        Object userobj = uservalue;
-        User user = (User)userobj;
-        
-        int userid = user.getId();
-        //userid = ((User)userobject).getId();
-        */
+        DBuser dbuser = new DBuser();
+        DBtask dbtask = new DBtask();
+        DBinstructor dbinstructor = new DBinstructor();
         
         User user = (User) request.getSession().getAttribute("user");
         int userid = user.getId();
@@ -165,7 +151,8 @@ public class EditEntry extends HttpServlet {
                 log("in editinfo section and message is empty, taskid: " + taskid);
 
                 url = "/AssignmentManager.jsp";
-                todoAppService.instance().edit(indexId, description, instructor, duedate, done);
+                //todoAppService.instance().edit(indexId, description, instructor, duedate, done);
+                dbtask.edit(indexId, description, instructor, duedate, done);
             }
 
             //task = todoAppService.instance().getATask(Integer.parseInt(id));
@@ -177,18 +164,22 @@ public class EditEntry extends HttpServlet {
         ArrayList<TaskHandlerBean> tasks = null;
 
         try {
-            tasks = todoAppService.instance().getTasks(userid);
+            //tasks = todoAppService.instance().getTasks(userid);
+            tasks = dbtask.getTasks(userid);
             request.setAttribute("tasks", tasks);
-            // session.setAttribute("tasks", tasks);  // is this needed ??
-            task = todoAppService.instance().getATask(Integer.parseInt(taskid));
+            
+            //task = todoAppService.instance().getATask(Integer.parseInt(taskid));
+            task = dbtask.getATask(Integer.parseInt(taskid));
             request.setAttribute("task", task);
-            request.setAttribute("instructors", InstructorService.instance().getList());
+            //request.setAttribute("instructors", InstructorService.instance().getList());
+            request.setAttribute("instructors", dbinstructor.getList());
             request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
         } catch (Exception e) {
             System.out.println("got a catch ");
             e.printStackTrace(System.out);
         }
 
+        request.setAttribute("user", user);
         request.setAttribute("taskid", taskid);  
         request.setAttribute("message", message);
         request.setAttribute("msgDescription", msgDescription);
