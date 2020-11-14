@@ -15,9 +15,6 @@
 <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
 <fmt:parseDate var="currdate" value="${today}" pattern="yyyy-MM-dd"/>
 
-<%--
-    request.setAttribute("tasks", todoAppService.instance().getTasks());
---%>
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +27,7 @@
 
         <div id="topbanner">
             <h1 id="course">User Task List</h1>
-            <h2 id="assignment">Assignment 10</h2>
+            <h2 id="assignment">Assignment 11</h2>
             <h3 id="student">CSCI 2466 - Thursday Session</h3>
         </div>
 
@@ -42,7 +39,7 @@
             <p>please make the following desired changes: </p>
             <br>
 
-            <form action="EditEntry" method="get">
+            <form action="EditTask" method="get">
                 <input type="hidden" name="action" value="editinfo">
                 <input type="hidden" name="taskid" value=${task.id}>
 
