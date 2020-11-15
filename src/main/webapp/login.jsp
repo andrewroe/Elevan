@@ -59,7 +59,7 @@
             <input type="hidden" name="action" value="loginUser">
             <input type="email" name="email" value="${user.email}" required>
             <span class="red-text">${messages[0]}</span><br>
-            <input type="text" name="password" value="${user.password}" required>
+            <input type="password" name="password" value="${user.password}" required>
             <span class="red-text">${messages[1]}</span><br>
             <input type="radio" name="rememberMe">Remember Me<br>
             <input type="submit" value="Login">
