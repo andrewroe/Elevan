@@ -51,7 +51,7 @@ public class AddTask extends HttpServlet {
             DBinstructor dbinstructor = new DBinstructor();
             
             User user = (User) request.getSession().getAttribute("user");
-            int id = Integer.parseInt(request.getParameter("id"));
+            int userid = Integer.parseInt(request.getParameter("userid"));
             
             String url = "/AssignmentManger.jsp";
             String message = "";
@@ -66,18 +66,22 @@ public class AddTask extends HttpServlet {
             // validate the parameters
             if (description == null || description.isEmpty()) {
                 msgDescription = "fill in description";
-                message = "Bad or no Input, please correct";
+                message = "Bad or no description entered, please correct";
+            }
+            else {
+                msgDescription = description;
             }
 
             if (instructor == null || instructor.isEmpty()) {
-                msgInstructor = "fill in instructor";
-                message = "Bad or no Input, please correct";
+                msgInstructor = "select instructor";
+                message = "Bad or no instructor selected, please correct";
             }
 
             if (duedate == null || duedate.isEmpty()) {
                 msgDuedate = "yyyy-mm-dd";
-                message = "Bad or no Input, please correct, date Must be yyyy-mm-dd";
+                message = "Bad or no date selected, please correct, date Must be yyyy-mm-dd";
             } else {
+                msgDuedate = duedate;
                 if (duedate.length() < 10) {
                     ok = false;
                 }
@@ -92,19 +96,17 @@ public class AddTask extends HttpServlet {
 
             if (!ok) {
                 msgDuedate = "yyyy-mm-dd";
-                message = "Bad or no Input, please correct, date Must be yyyy-mm-dd";
+                message = "Bad date value, please correct, date Must be yyyy-mm-dd";
             }
 
             if (message.isEmpty()) {
-                //todoAppService.instance().add(description, instructor, duedate, false, id);
-                dbtask.add(description, instructor, duedate, false, id);
+                dbtask.add(description, instructor, duedate, false, userid);
             }
 
             ArrayList<Task> tasks = null;
                 
                 try {
-                    //tasks = todoAppService.instance().getTasks(id);
-                    tasks = dbtask.getTasks(id);
+                    tasks = dbtask.getTasks(userid);
                 }
                 catch (Exception e) {
                     System.out.println("got a catch ");
@@ -113,8 +115,7 @@ public class AddTask extends HttpServlet {
                 
             request.setAttribute("user", user);
             request.setAttribute("tasks", tasks);
-            request.setAttribute("id", id);
-            //request.setAttribute("instructors", InstructorService.instance().getList());
+            request.setAttribute("userid", userid);
             request.setAttribute("instructors", dbinstructor.getList());
                      
             request.setAttribute("message", message);

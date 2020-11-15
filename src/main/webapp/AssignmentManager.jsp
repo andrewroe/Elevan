@@ -47,10 +47,6 @@
                 <c:choose>
                     <c:when test="${empty message}">
                         <input class="blackonwhite" type="text" name="description" size="22" />
-
-                        <%--
-                            <c:import url="/includes/instructors.jsp" />
-                        --%> 
                         <label for="instructor">Instructor</label>
                         <select class="backonwhite" id="instructor" name="instructor" size="4">
 
@@ -83,7 +79,7 @@
                 </c:choose>
    
                 <input type="hidden" name="user" value="${user}">
-                <input type="hidden" name="id" value="${user.id}">
+                <input type="hidden" name="userid" value="${user.id}">
                 <input type="submit" name="add" value="add" size="3"/>
             </form>
             <br>

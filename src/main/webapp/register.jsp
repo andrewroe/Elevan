@@ -32,9 +32,9 @@
             <span class="red-text">${messages[0]}</span><br>
             <input type="email" name="email" value="${user.email}" required>
             <span class="red-text">${messages[1]}</span><br>
-            <input type="text" name="password" value="${user.password}" required>
+            <input type="password" name="password" value="${user.password}" required>
             <span class="red-text">${messages[2]}</span><br>
-            <input type="text" name="confirmpwd" value="Confirm Password" required>
+            <input type="password" name="confirmpwd" value="Confirm Password" required>
             <span class="red-text">${messages[3]}</span><br>
             
             <input type="submit" value="Register">
