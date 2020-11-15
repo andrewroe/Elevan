@@ -67,9 +67,6 @@
                     <c:otherwise>
                         <input class="blackonwhite" type="text" name="description" value="${msgDescription}" size="22" />
 
-                        <%--
-                            <c:import url="/includes/instructors.jsp" />
-                        --%>
                         <label for="instructor">Instructor</label>
                         <select class="backonwhite" id="instructor" name="instructor" size="4">
 
