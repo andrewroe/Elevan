@@ -20,7 +20,7 @@
 
         <div id="topbanner">
             <h1 id="course">User Task List</h1>
-            <h2 id="assignment">Assignment 10</h2>
+            <h2 id="assignment">Assignment 11</h2>
             <h3 id="student">CSCI 2466 - Thursday Session</h3>
         </div>
 

@@ -53,18 +53,14 @@ public class SubmitTask extends HttpServlet {
 
         if (request.getParameter("action") != null) {
             int taskid = Integer.parseInt(request.getParameter("taskid"));
-            //todoAppService.instance().markSubmitted(taskid);
             dbtask.markSubmitted(taskid);
             request.setAttribute("id", taskid);
         }
 
         ArrayList<Task> tasks = null;
-        //tasks = todoAppService.instance().getTasks(userid);
         tasks = dbtask.getTasks(userid);
         request.setAttribute("tasks", tasks);
         request.setAttribute("user", user);
-
-        //request.setAttribute("instructors", InstructorService.instance().getList());
         request.setAttribute("instructors", dbinstructor.getList());
 
         getServletContext().getRequestDispatcher("/AssignmentManager.jsp")

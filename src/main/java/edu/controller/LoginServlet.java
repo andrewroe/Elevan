@@ -137,12 +137,8 @@ public class LoginServlet extends AbstractServlet {
                 ArrayList<Task> tasks = null;
                 
                 try {
-                    //tasks = todoAppService.instance().getTasks(user.getId());
                     tasks = dbtask.getTasks(user.getId());
-                    //request.setAttribute("instructors", InstructorService.instance().getList());
                     request.setAttribute("instructors", dbinstructor.getList());
-                  
-                    //request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
                 }
                 catch (Exception e) {
                     System.out.println("got a catch ");

@@ -52,14 +52,12 @@ public class RemoveTask extends HttpServlet {
         log("userid = " + userid + "taskid = " + taskid);
         
         if (request.getParameter("action") != null) {
-            //todoAppService.instance().remove(taskid);
             dbtask.remove(taskid);
         }
 
         //ArrayList<TaskHandlerBean> tasks = todoAppService.instance().getTasks(user.getId());
         ArrayList<Task> tasks = dbtask.getTasks(user.getId());
         request.setAttribute("tasks", tasks);
-        //request.setAttribute("instructors", InstructorService.instance().getList());
         request.setAttribute("instructors", dbinstructor.getList());
         request.setAttribute("user", user);
             

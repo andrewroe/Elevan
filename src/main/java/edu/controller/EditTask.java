@@ -152,8 +152,6 @@ public class EditTask extends HttpServlet {
                 //todoAppService.instance().edit(indexId, description, instructor, duedate, done);
                 dbtask.edit(indexId, description, instructor, duedate, done);
             }
-
-            //task = todoAppService.instance().getATask(Integer.parseInt(id));
         }
 
         System.out.println("wrap up, userid = " + userid + " taskid = " + taskid);
@@ -167,7 +165,6 @@ public class EditTask extends HttpServlet {
             task = dbtask.getATask(Integer.parseInt(taskid));
             request.setAttribute("task", task); 
             request.setAttribute("instructors", dbinstructor.getList());
-            //request.setAttribute("unlist", InstructorService.instance().getUnSelectList(task.getInstructor()));
             request.setAttribute("unlist", dbinstructor.getUnSelectList(task.getInstructor()));
         } catch (Exception e) {
             System.out.println("got a catch ");

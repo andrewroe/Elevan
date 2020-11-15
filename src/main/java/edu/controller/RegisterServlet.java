@@ -82,9 +82,6 @@ public class RegisterServlet extends AbstractServlet {
         }
 
         if (!ok) {
-            //url = "/WEB-INF/register.jsp";
-            //user = new User("", "Email", "Password", false);
-
             request.setAttribute("user", user);
             request.setAttribute("messages", messages);
             forward(request, response, url);
@@ -122,7 +119,6 @@ public class RegisterServlet extends AbstractServlet {
                 ArrayList<Task> tasks = null;
 
                 try {
-                    //tasks = todoAppService.instance().getTasks(user.getId());
                     tasks = dbtask.getTasks(user.getId());
                 } catch (Exception e) {
 
