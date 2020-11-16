@@ -55,7 +55,6 @@ public class RemoveTask extends HttpServlet {
             dbtask.remove(taskid);
         }
 
-        //ArrayList<TaskHandlerBean> tasks = todoAppService.instance().getTasks(user.getId());
         ArrayList<Task> tasks = dbtask.getTasks(user.getId());
         request.setAttribute("tasks", tasks);
         request.setAttribute("instructors", dbinstructor.getList());
